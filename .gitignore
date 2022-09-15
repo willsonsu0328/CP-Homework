@@ -1,0 +1,30 @@
+*.swp
+**/.DS_Store
+ 
+# Xcode
+ 
+## User settings
+xcuserdata/
+ 
+## Obj-C/Swift specific
+*.hmap
+ 
+## App packaging
+*.ipa
+*.dSYM.zip
+*.dSYM
+ 
+# CocoaPods
+# Pods/
+ 
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+fastlane/scan_derived_data
+ 
+# Bundler
+.bundle/
+vendor/bundle
+lib/bundler/man/

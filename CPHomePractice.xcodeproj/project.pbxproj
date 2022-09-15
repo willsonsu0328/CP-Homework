@@ -16,6 +16,11 @@
 		C8043A2E28CDC9E800CB6F0A /* CPHomePracticeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8043A2D28CDC9E800CB6F0A /* CPHomePracticeTests.swift */; };
 		C8043A3828CDC9E800CB6F0A /* CPHomePracticeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8043A3728CDC9E800CB6F0A /* CPHomePracticeUITests.swift */; };
 		C8043A3A28CDC9E800CB6F0A /* CPHomePracticeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8043A3928CDC9E800CB6F0A /* CPHomePracticeUITestsLaunchTests.swift */; };
+		C8332E0728D35D1E00ACE160 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8332E0628D35D1E00ACE160 /* APIManager.swift */; };
+		C8982FF228D0C7A3003B5589 /* StructConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8982FF128D0C7A3003B5589 /* StructConvertible.swift */; };
+		C8982FF528D0C970003B5589 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8982FF428D0C970003B5589 /* Users.swift */; };
+		C8982FF728D0C99D003B5589 /* GQLQueryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8982FF628D0C99D003B5589 /* GQLQueryProtocol.swift */; };
+		C8982FF928D0D6E2003B5589 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8982FF828D0D6E2003B5589 /* Todo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +54,11 @@
 		C8043A3328CDC9E800CB6F0A /* CPHomePracticeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CPHomePracticeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8043A3728CDC9E800CB6F0A /* CPHomePracticeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPHomePracticeUITests.swift; sourceTree = "<group>"; };
 		C8043A3928CDC9E800CB6F0A /* CPHomePracticeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPHomePracticeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C8332E0628D35D1E00ACE160 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		C8982FF128D0C7A3003B5589 /* StructConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructConvertible.swift; sourceTree = "<group>"; };
+		C8982FF428D0C970003B5589 /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
+		C8982FF628D0C99D003B5589 /* GQLQueryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GQLQueryProtocol.swift; sourceTree = "<group>"; };
+		C8982FF828D0D6E2003B5589 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +109,9 @@
 		C8043A1528CDC9E500CB6F0A /* CPHomePractice */ = {
 			isa = PBXGroup;
 			children = (
+				C8332E0528D35CC800ACE160 /* API */,
+				C8982FF028D0C6C8003B5589 /* Protocol */,
+				C8982FF328D0C917003B5589 /* Query Structs */,
 				C8043A1628CDC9E500CB6F0A /* AppDelegate.swift */,
 				C8043A1828CDC9E500CB6F0A /* SceneDelegate.swift */,
 				C8043A1A28CDC9E500CB6F0A /* ViewController.swift */,
@@ -125,6 +138,32 @@
 				C8043A3928CDC9E800CB6F0A /* CPHomePracticeUITestsLaunchTests.swift */,
 			);
 			path = CPHomePracticeUITests;
+			sourceTree = "<group>";
+		};
+		C8332E0528D35CC800ACE160 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				C8332E0628D35D1E00ACE160 /* APIManager.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		C8982FF028D0C6C8003B5589 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				C8982FF128D0C7A3003B5589 /* StructConvertible.swift */,
+				C8982FF628D0C99D003B5589 /* GQLQueryProtocol.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		C8982FF328D0C917003B5589 /* Query Structs */ = {
+			isa = PBXGroup;
+			children = (
+				C8982FF428D0C970003B5589 /* Users.swift */,
+				C8982FF828D0D6E2003B5589 /* Todo.swift */,
+			);
+			path = "Query Structs";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,8 +297,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8332E0728D35D1E00ACE160 /* APIManager.swift in Sources */,
+				C8982FF228D0C7A3003B5589 /* StructConvertible.swift in Sources */,
 				C8043A1B28CDC9E500CB6F0A /* ViewController.swift in Sources */,
+				C8982FF528D0C970003B5589 /* Users.swift in Sources */,
+				C8982FF928D0D6E2003B5589 /* Todo.swift in Sources */,
 				C8043A1728CDC9E500CB6F0A /* AppDelegate.swift in Sources */,
+				C8982FF728D0C99D003B5589 /* GQLQueryProtocol.swift in Sources */,
 				C8043A1928CDC9E500CB6F0A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -447,6 +491,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -475,6 +520,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
