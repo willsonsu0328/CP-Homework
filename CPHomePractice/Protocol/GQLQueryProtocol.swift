@@ -50,7 +50,7 @@ extension GQLQueryProtocol {
                 string.append(recursiveDict(value))
             } else {
                 string.append(key)
-                if index != dictionary.keys.count {
+                if index != dictionary.keys.count - 1 {
                     string.append("\n")
                 }
             }
