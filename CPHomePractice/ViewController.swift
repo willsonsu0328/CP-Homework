@@ -18,13 +18,13 @@ class ViewController: UIViewController {
 
     @IBAction func queryUsersTapped(_ sender: Any) {
 
-        struct Users: GQLQueryProtocol {
+        struct users: GQLQueryProtocol {
             var id: String = ""
             var email: String = ""
             var name: String = ""
         }
 
-        APIManager.shared.queryUsers(query: Users()) { response, error, userModels in
+        APIManager.shared.queryUsers(query: users()) { response, error, userModels in
             print(userModels ?? "no users data")
         }
 
@@ -32,13 +32,13 @@ class ViewController: UIViewController {
 
     @IBAction func queryUserWithIDTapped(_ sender: Any) {
 
-        struct User: GQLQueryProtocol {
+        struct user: GQLQueryProtocol {
             var id: String = ""
             var name: String = ""
             var email: String = ""
         }
 
-        APIManager.shared.queryUser(query: User(), id: "4dc70521-22bb-4396-b37a-4a927c66d43b") { response, error, userModel in
+        APIManager.shared.queryUser(query: user(), id: "4dc70521-22bb-4396-b37a-4a927c66d43b") { response, error, userModel in
             print(userModel ?? "no user data")
         }
 
@@ -46,12 +46,12 @@ class ViewController: UIViewController {
 
     @IBAction func queryTodosTapped(_ sender: Any) {
 
-        struct Todos: GQLQueryProtocol {
+        struct todos: GQLQueryProtocol {
             var id: String = ""
             var description: String = ""
         }
 
-        APIManager.shared.queryTodos(query: Todos()) { response, error, todoModels in
+        APIManager.shared.queryTodos(query: todos()) { response, error, todoModels in
             print(todoModels ?? "no todos data")
         }
 
@@ -59,17 +59,17 @@ class ViewController: UIViewController {
 
     @IBAction func queryUserTodosTapped(_ sender: Any) {
 
-        struct User: GQLQueryProtocol {
-            var todos = Todo()
+        struct user: GQLQueryProtocol {
+            var todos = todo()
         }
 
-        struct Todo: GQLQueryProtocol {
+        struct todo: GQLQueryProtocol {
             var id: String = ""
             var description: String = ""
             var done: Bool = false
         }
 
-        APIManager.shared.queryUser(query: User(), id: "someUser") { response, error, userModel in
+        APIManager.shared.queryUser(query: user(), id: "someUser") { response, error, userModel in
             print(userModel ?? "no user todos data")
         }
         
