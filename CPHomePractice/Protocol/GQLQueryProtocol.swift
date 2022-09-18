@@ -56,7 +56,8 @@ extension GQLQueryProtocol {
     private func recursiveDict(_ dictionary: [String: Any]) -> String {
         var string = ""
         string.append("{")
-        for (index, key) in dictionary.keys.enumerated() {
+        let keys = dictionary.keys.sorted { $0 < $1 }
+        for (index, key) in keys.enumerated() {
             if let value = dictionary[key] as? [String: Any] {
                 string.append(key)
                 string.append(recursiveDict(value))
@@ -73,7 +74,9 @@ extension GQLQueryProtocol {
 
     private func createParameterString(_ parameters: [String: Any]) -> String {
         var paramString: String = ""
-        for (key, value) in parameters {
+        let sortedParamtersKeys = parameters.keys.sorted { $0 < $1 }
+        for key in sortedParamtersKeys {
+            let value = parameters[key]
             if let dict = value as? [String: Any] {
                 paramString.append("\(key)" + ":")
                 paramString.append("{")
@@ -84,7 +87,7 @@ extension GQLQueryProtocol {
                 if let stringValue = value as? String {
                     paramString.append("\(key)" + ":" + "\"\(stringValue)\",")
                 } else {
-                    paramString.append("\(key)" + ":" + "\(value),")
+                    paramString.append("\(key)" + ":" + "\(value ?? ""),")
                 }
             }
         }
