@@ -75,5 +75,26 @@ class ViewController: UIViewController {
         
     }
 
+
+    @IBAction func mutationUpdateTodoTapped(_ sender: Any) {
+
+        struct updateTodo: GQLQueryProtocol {
+            var id: String = ""
+            var done: Bool = false
+        }
+
+        let parameters: [String: Any] = [
+            "input": [
+                "id": "8db57b8f-be09-4e07-a1f6-4fb77d9b16e7",
+                "done": true
+            ]
+        ]
+
+        APIManager.shared.mutationUpdateTodo(query: updateTodo(), parameters: parameters) { response, error, todoModel in
+            print(todoModel ?? "no todoModel data")
+        }
+        
+    }
+
 }
 

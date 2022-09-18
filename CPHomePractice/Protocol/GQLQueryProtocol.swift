@@ -7,32 +7,44 @@
 
 import Foundation
 
+enum GQLOperationType: String {
+    case query
+    case mutation
+}
 
 protocol GQLQueryProtocol: StructConvertible {
-    
+
 }
 
 extension GQLQueryProtocol {
 
-    func generateGQLString(_ parameters: [String: Any]? = nil) -> String? {
+    func generateGQLString(operationType: GQLOperationType = .query, _ parameters: [String: Any]? = nil) -> String? {
         var queryString: String = ""
 
         if let dictionary = self.convertToDictionary() {
             queryString = recursiveDict(dictionary)
 
             // append struct name
-            let structName = String(describing: type(of: self)).lowercased()
+            let structName = String(describing: type(of: self))
 
             // append parameters if needed
             if let parameters = parameters {
-                let paramString: String = createParameterString(parameters)
+                let paramString = "(" + createParameterString(parameters) + ")"
                 queryString = structName + paramString + queryString
             } else {
                 queryString = structName + queryString
             }
 
             // wrap brackets
-            queryString = "{" + queryString + "}"
+            let wrapQuery = "{" + queryString + "}"
+
+            // query or mutation
+            switch operationType {
+            case .query:
+                queryString = wrapQuery
+            case .mutation:
+                queryString = operationType.rawValue + " " + wrapQuery
+            }
 
             // debug
             print(queryString)
@@ -61,12 +73,22 @@ extension GQLQueryProtocol {
 
     private func createParameterString(_ parameters: [String: Any]) -> String {
         var paramString: String = ""
-        paramString += "("
         for (key, value) in parameters {
-            paramString += "\(key)" + ":" + "\"\(value)\","
+            if let dict = value as? [String: Any] {
+                paramString.append("\(key)" + ":")
+                paramString.append("{")
+                paramString.append(createParameterString(dict))
+                paramString.append("}")
+                paramString.append(",")
+            } else {
+                if let stringValue = value as? String {
+                    paramString.append("\(key)" + ":" + "\"\(stringValue)\",")
+                } else {
+                    paramString.append("\(key)" + ":" + "\(value),")
+                }
+            }
         }
         paramString.removeLast()
-        paramString += ")"
         return paramString
     }
     

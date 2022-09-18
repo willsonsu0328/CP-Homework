@@ -13,7 +13,7 @@ class APIManager: NSObject {
 
     let baseURLString = "https://api.mocki.io/v2/c4d7a195/graphql"
 
-    func fetch(query: GQLQueryProtocol, parameters: [String: Any]? = nil, completion: @escaping (_ response: URLResponse?, _ error: Error?, _ resultDataDict: [String: Any]?) -> Void) {
+    func fetch(operationType: GQLOperationType = .query, query: GQLQueryProtocol, parameters: [String: Any]? = nil, completion: @escaping (_ response: URLResponse?, _ error: Error?, _ resultDataDict: [String: Any]?) -> Void) {
 
         guard let url = URL(string: baseURLString) else {
             // TODO: 定義 error
@@ -24,7 +24,7 @@ class APIManager: NSObject {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
         let parameter = [
-            "query": query.generateGQLString(parameters)
+            "query": query.generateGQLString(operationType: operationType, parameters)
         ]
 
         let data = try? JSONEncoder().encode(parameter)
@@ -79,6 +79,17 @@ extension APIManager {
                 todos = try? JSONDecoder().decode([TodoModel].self, from: data)
             }
             completion(response, error, todos)
+        }
+    }
+
+    func mutationUpdateTodo(query: GQLQueryProtocol, parameters: [String: Any], completion: @escaping (_ response: URLResponse?, _ error: Error?, _ todoModel: TodoModel?) -> Void) {
+
+        APIManager.shared.fetch(operationType: .mutation, query: query, parameters: parameters) { response, error, resultDataDict in
+            var todo: TodoModel?
+            if let todoDict = resultDataDict?["updateTodo"] as? [String: Any], let data = try? JSONSerialization.data(withJSONObject: todoDict, options: []) {
+                todo = try? JSONDecoder().decode(TodoModel.self, from: data)
+            }
+            completion(response, error, todo)
         }
     }
     
