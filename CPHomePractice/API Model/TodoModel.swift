@@ -7,6 +7,14 @@
 
 import Foundation
 
+struct TodosData: Codable {
+    let todos: [TodoModel]
+}
+
+struct UpdateTodoData: Codable {
+    let updateTodo: TodoModel
+}
+
 struct TodoModel: Codable {
 
     var id: String?

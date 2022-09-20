@@ -24,8 +24,13 @@ class ViewController: UIViewController {
             var name: String = ""
         }
 
-        APIManager.shared.queryUsers(query: users()) { response, error, userModels in
-            print(userModels ?? "no users data")
+        APIManager.shared.fetch2(query: users()) { (result: Result<ResponseData<UsersData>, Error>) in
+            switch result {
+            case let .success(responseData):
+                print(responseData.data.users)
+            case let .failure(error):
+                print(error)
+            }
         }
 
     }
@@ -38,8 +43,13 @@ class ViewController: UIViewController {
             var email: String = ""
         }
 
-        APIManager.shared.queryUser(query: user(), id: "4dc70521-22bb-4396-b37a-4a927c66d43b") { response, error, userModel in
-            print(userModel ?? "no user data")
+        APIManager.shared.fetch2(query: user()) { (result: Result<ResponseData<UserData>, Error>) in
+            switch result {
+            case let .success(responseData):
+                print(responseData.data.user)
+            case let .failure(error):
+                print(error)
+            }
         }
 
     }
@@ -51,8 +61,13 @@ class ViewController: UIViewController {
             var description: String = ""
         }
 
-        APIManager.shared.queryTodos(query: todos()) { response, error, todoModels in
-            print(todoModels ?? "no todos data")
+        APIManager.shared.fetch2(query: todos()) { (result: Result<ResponseData<TodosData>, Error>) in
+            switch result {
+            case let .success(responseData):
+                print(responseData.data.todos)
+            case let .failure(error):
+                print(error)
+            }
         }
 
     }
@@ -69,8 +84,15 @@ class ViewController: UIViewController {
             var done: Bool = false
         }
 
-        APIManager.shared.queryUser(query: user(), id: "someUser") { response, error, userModel in
-            print(userModel ?? "no user todos data")
+        APIManager.shared.fetch2(query: user(), parameters: [
+            "id": "someUser"
+        ]) { (result: Result<ResponseData<UserData>, Error>) in
+            switch result {
+            case let .success(responseData):
+                print(responseData.data.user)
+            case let .failure(error):
+                print(error)
+            }
         }
         
     }
@@ -90,8 +112,13 @@ class ViewController: UIViewController {
             ]
         ]
 
-        APIManager.shared.mutationUpdateTodo(query: updateTodo(), parameters: parameters) { response, error, todoModel in
-            print(todoModel ?? "no todoModel data")
+        APIManager.shared.fetch2(operationType: .mutation, query: updateTodo(), parameters: parameters) { (result: Result<ResponseData<UpdateTodoData>, Error>) in
+            switch result {
+            case let .success(responseData):
+                print(responseData.data.updateTodo)
+            case let .failure(error):
+                print(error)
+            }
         }
         
     }

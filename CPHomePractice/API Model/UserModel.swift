@@ -7,6 +7,14 @@
 
 import Foundation
 
+struct UserData: Codable {
+    let user: UserModel
+}
+
+struct UsersData: Codable {
+    let users: [UserModel]
+}
+
 struct UserModel: Codable {
 
     var email: String?
