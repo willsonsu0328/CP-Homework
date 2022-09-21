@@ -19,7 +19,6 @@
 		C8332E0728D35D1E00ACE160 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8332E0628D35D1E00ACE160 /* APIManager.swift */; };
 		C889213928D59750009FC13F /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C889213828D59750009FC13F /* UserModel.swift */; };
 		C889213B28D5987E009FC13F /* TodoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C889213A28D5987E009FC13F /* TodoModel.swift */; };
-		C8982FF228D0C7A3003B5589 /* StructConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8982FF128D0C7A3003B5589 /* StructConvertible.swift */; };
 		C8982FF728D0C99D003B5589 /* GQLQueryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8982FF628D0C99D003B5589 /* GQLQueryProtocol.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,7 +56,6 @@
 		C8332E0628D35D1E00ACE160 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		C889213828D59750009FC13F /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		C889213A28D5987E009FC13F /* TodoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoModel.swift; sourceTree = "<group>"; };
-		C8982FF128D0C7A3003B5589 /* StructConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructConvertible.swift; sourceTree = "<group>"; };
 		C8982FF628D0C99D003B5589 /* GQLQueryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GQLQueryProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -160,7 +158,6 @@
 		C8982FF028D0C6C8003B5589 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
-				C8982FF128D0C7A3003B5589 /* StructConvertible.swift */,
 				C8982FF628D0C99D003B5589 /* GQLQueryProtocol.swift */,
 			);
 			path = Protocol;
@@ -299,7 +296,6 @@
 			files = (
 				C8332E0728D35D1E00ACE160 /* APIManager.swift in Sources */,
 				C889213B28D5987E009FC13F /* TodoModel.swift in Sources */,
-				C8982FF228D0C7A3003B5589 /* StructConvertible.swift in Sources */,
 				C8043A1B28CDC9E500CB6F0A /* ViewController.swift in Sources */,
 				C8043A1728CDC9E500CB6F0A /* AppDelegate.swift in Sources */,
 				C8982FF728D0C99D003B5589 /* GQLQueryProtocol.swift in Sources */,

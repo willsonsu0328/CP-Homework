@@ -12,13 +12,13 @@ enum GQLOperationType: String {
     case mutation
 }
 
-protocol GQLQueryProtocol: StructConvertible {
+protocol GQLQueryProtocol: Codable {
 
 }
 
 extension GQLQueryProtocol {
 
-    func generateGQLString(operationType: GQLOperationType = .query, _ parameters: [String: Any]? = nil) -> String? {
+    func generateGQLString(operationType: GQLOperationType = .query, _ parameters: [String: Any]? = nil) -> String {
         var queryString: String = ""
 
         if let dictionary = self.convertToDictionary() {
@@ -51,6 +51,20 @@ extension GQLQueryProtocol {
         }
 
         return queryString
+    }
+
+    func convertToDictionary() -> [String: Any]? {
+
+        var dict: [String: Any]?
+
+        do {
+            let data = try JSONEncoder().encode(self)
+            dict = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any]
+        } catch {
+            print(error)
+        }
+
+        return dict
     }
 
     private func recursiveDict(_ dictionary: [String: Any]) -> String {
