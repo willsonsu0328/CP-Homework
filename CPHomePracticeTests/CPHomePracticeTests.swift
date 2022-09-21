@@ -18,6 +18,8 @@ class CPHomePracticeTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
+    // MARK: Struct test
+
     func testUsers() throws {
 
         struct users: GQLQueryProtocol {
@@ -112,7 +114,14 @@ class CPHomePracticeTests: XCTestCase {
 
     }
 
-    // MARK: Json to Swift instance test
+    // MARK: JSON to Swift instance test
+
+    func decodeMockData<T: Codable>(jsonString: String = "") -> ResponseData<T>? {
+        let data = jsonString.data(using: .utf8)
+        guard let data = data else { return nil }
+        let object = try? JSONDecoder().decode(ResponseData<T>.self, from: data)
+        return object
+    }
 
     func testUsersModels() throws {
 
@@ -121,25 +130,39 @@ class CPHomePracticeTests: XCTestCase {
             var email: String = ""
             var name: String = ""
         }
-
-        let expectation = self.expectation(description: "Waiting for the queryUsers call to complete.")
-
-        var userArray: [UserModel]?
-        APIManager.shared.queryUsers(query: users()) { response, error, userModels in
-            userArray = userModels
-            expectation.fulfill()
+        let json = """
+        {
+          "data": {
+            "users": [
+              {
+                "id": "Hello World",
+                "email": "Hello World",
+                "name": "Hello World"
+              },
+              {
+                "id": "Hello World",
+                "email": "Hello World",
+                "name": "Hello World"
+              },
+              {
+                "id": "Hello World",
+                "email": "Hello World",
+                "name": "Hello World"
+              }
+            ]
+          }
         }
+        """
+        let responseData: ResponseData<UsersData>? = decodeMockData(jsonString: json)
 
-        waitForExpectations(timeout: 2) { error in
-            if let userArray = userArray {
-                for user in userArray {
-                    XCTAssertEqual(user.id, "Hello World")
-                    XCTAssertEqual(user.email, "Hello World")
-                    XCTAssertEqual(user.name, "Hello World")
-                }
-            } else {
-                XCTAssert(false)
+        if let userModels = responseData?.data.users {
+            for user in userModels {
+                XCTAssertEqual(user.id, "Hello World")
+                XCTAssertEqual(user.email, "Hello World")
+                XCTAssertEqual(user.name, "Hello World")
             }
+        } else {
+            XCTAssert(false)
         }
     }
 
@@ -151,22 +174,26 @@ class CPHomePracticeTests: XCTestCase {
             var email: String = ""
         }
 
-        let expectation = self.expectation(description: "Waiting for the queryUserWithID call to complete.")
-
-        var userData: UserModel?
-        APIManager.shared.queryUser(query: user(), id: "4dc70521-22bb-4396-b37a-4a927c66d43b") { response, error, userModel in
-            userData = userModel
-            expectation.fulfill()
-        }
-
-        waitForExpectations(timeout: 2) { _ in
-            if let userData = userData {
-                XCTAssertEqual(userData.id, "Hello World")
-                XCTAssertEqual(userData.email, "Hello World")
-                XCTAssertEqual(userData.name, "Hello World")
-            } else {
-                XCTAssert(false)
+        let json = """
+        {
+            "data": {
+                "user": {
+                    "id": "Hello World",
+                    "email": "Hello World",
+                    "name": "Hello World"
+                }
             }
+        }
+        """
+
+        let responeData: ResponseData<UserData>? = decodeMockData(jsonString: json)
+
+        if let userModel = responeData?.data.user {
+            XCTAssertEqual(userModel.id, "Hello World")
+            XCTAssertEqual(userModel.email, "Hello World")
+            XCTAssertEqual(userModel.name, "Hello World")
+        } else {
+            XCTAssert(false)
         }
     }
 
@@ -177,23 +204,32 @@ class CPHomePracticeTests: XCTestCase {
             var description: String = ""
         }
 
-        let expectation = self.expectation(description: "Waiting for the queryTodos call to complete.")
-
-        var todoArray: [TodoModel]?
-        APIManager.shared.queryTodos(query: todos()) { response, error, todoModels in
-            todoArray = todoModels
-            expectation.fulfill()
+        let json = """
+        {
+          "data": {
+            "todos": [
+              {
+                "id": "Hello World",
+                "description": "Hello World"
+              },
+              {
+                "id": "Hello World",
+                "description": "Hello World"
+              }
+            ]
+          }
         }
+        """
 
-        waitForExpectations(timeout: 2) { _ in
-            if let todoArray = todoArray {
-                for todo in todoArray {
-                    XCTAssertEqual(todo.id, "Hello World")
-                    XCTAssertEqual(todo.description, "Hello World")
-                }
-            } else {
-                XCTAssert(false)
+        let responeData: ResponseData<TodosData>? = decodeMockData(jsonString: json)
+
+        if let todoModels = responeData?.data.todos {
+            for todo in todoModels {
+                XCTAssertEqual(todo.id, "Hello World")
+                XCTAssertEqual(todo.description, "Hello World")
             }
+        } else {
+            XCTAssert(false)
         }
     }
 
@@ -209,24 +245,37 @@ class CPHomePracticeTests: XCTestCase {
             var done: Bool = false
         }
 
-        let expectation = self.expectation(description: "Waiting for the quertyUserTodos call to complete.")
-
-        var userData: UserModel?
-        APIManager.shared.queryUser(query: user(), id: "someUser") { response, error, userModel in
-            userData = userModel
-            expectation.fulfill()
-        }
-
-        waitForExpectations(timeout: 2) { _ in
-            if let userData = userData, let todos = userData.todos {
-                for todo in todos {
-                    XCTAssertEqual(todo.id, "Hello World")
-                    XCTAssertEqual(todo.description, "Hello World")
-                    XCTAssertEqual(todo.done, true)
+        let json = """
+        {
+          "data": {
+            "user": {
+              "todos": [
+                {
+                  "id": "Hello World",
+                  "description": "Hello World",
+                  "done": true
+                },
+                {
+                  "id": "Hello World",
+                  "description": "Hello World",
+                  "done": true
                 }
-            } else {
-                XCTAssert(false)
+              ]
             }
+          }
+        }
+        """
+
+        let responeData: ResponseData<UserData>? = decodeMockData(jsonString: json)
+
+        if let userModel = responeData?.data.user, let todos = userModel.todos {
+            for todo in todos {
+                XCTAssertEqual(todo.id, "Hello World")
+                XCTAssertEqual(todo.description, "Hello World")
+                XCTAssertEqual(todo.done, true)
+            }
+        } else {
+            XCTAssert(false)
         }
     }
 
@@ -237,28 +286,24 @@ class CPHomePracticeTests: XCTestCase {
             var done: Bool = false
         }
 
-        let parameters: [String: Any] = [
-            "input": [
-                "id": "8db57b8f-be09-4e07-a1f6-4fb77d9b16e7",
-                "done": true
-            ]
-        ]
-
-        let expectation = self.expectation(description: "Waiting for the mutationUpdateTodo call to complete.")
-
-        var todoData: TodoModel?
-        APIManager.shared.mutationUpdateTodo(query: updateTodo(), parameters: parameters) { response, error, todoModel in
-            todoData = todoModel
-            expectation.fulfill()
-        }
-
-        waitForExpectations(timeout: 2) { _ in
-            if let todoData = todoData {
-                XCTAssertEqual(todoData.id, "Hello World")
-                XCTAssertEqual(todoData.done, false)
-            } else {
-                XCTAssert(false)
+        let json = """
+        {
+          "data": {
+            "updateTodo": {
+              "id": "Hello World",
+              "done": false
             }
+          }
+        }
+        """
+
+        let responeData: ResponseData<UpdateTodoData>? = decodeMockData(jsonString: json)
+
+        if let todoModel = responeData?.data.updateTodo {
+            XCTAssertEqual(todoModel.id, "Hello World")
+            XCTAssertEqual(todoModel.done, false)
+        } else {
+            XCTAssert(false)
         }
 
     }
