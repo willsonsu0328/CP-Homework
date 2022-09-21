@@ -9,8 +9,6 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    // TODO: struct test, api test
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,7 +22,7 @@ class ViewController: UIViewController {
             var name: String = ""
         }
 
-        APIManager.shared.fetch2(query: users()) { (result: Result<ResponseData<UsersData>, Error>) in
+        APIManager.shared.fetch(query: users()) { (result: Result<ResponseData<UsersData>, Error>) in
             switch result {
             case let .success(responseData):
                 print(responseData.data.users)
@@ -43,7 +41,7 @@ class ViewController: UIViewController {
             var email: String = ""
         }
 
-        APIManager.shared.fetch2(query: user()) { (result: Result<ResponseData<UserData>, Error>) in
+        APIManager.shared.fetch(query: user()) { (result: Result<ResponseData<UserData>, Error>) in
             switch result {
             case let .success(responseData):
                 print(responseData.data.user)
@@ -61,7 +59,7 @@ class ViewController: UIViewController {
             var description: String = ""
         }
 
-        APIManager.shared.fetch2(query: todos()) { (result: Result<ResponseData<TodosData>, Error>) in
+        APIManager.shared.fetch(query: todos()) { (result: Result<ResponseData<TodosData>, Error>) in
             switch result {
             case let .success(responseData):
                 print(responseData.data.todos)
@@ -84,7 +82,7 @@ class ViewController: UIViewController {
             var done: Bool = false
         }
 
-        APIManager.shared.fetch2(query: user(), parameters: [
+        APIManager.shared.fetch(query: user(), parameters: [
             "id": "someUser"
         ]) { (result: Result<ResponseData<UserData>, Error>) in
             switch result {
@@ -112,7 +110,7 @@ class ViewController: UIViewController {
             ]
         ]
 
-        APIManager.shared.fetch2(operationType: .mutation, query: updateTodo(), parameters: parameters) { (result: Result<ResponseData<UpdateTodoData>, Error>) in
+        APIManager.shared.fetch(operationType: .mutation, query: updateTodo(), parameters: parameters) { (result: Result<ResponseData<UpdateTodoData>, Error>) in
             switch result {
             case let .success(responseData):
                 print(responseData.data.updateTodo)
