@@ -7,14 +7,43 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ExampleViewController: UIViewController {
+
+    @IBOutlet weak var tableView: UITableView!
+
+    var dataSource: [BaseTableViewItem] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = "GraphQL Example"
+        setupTableView()
     }
 
-    @IBAction func queryUsersTapped(_ sender: Any) {
+    func setupTableView() {
+        tableView.estimatedRowHeight = 55.0
+        tableView.rowHeight = UITableView.automaticDimension
+
+        dataSource = [
+            BaseTableViewItem(title: "query users", handler: { [weak self] indexPath in
+                self?.queryUsersTapped()
+            }),
+            BaseTableViewItem(title: "query user with id", handler: { [weak self] indexPath in
+                self?.queryUserWithIDTapped()
+            }),
+            BaseTableViewItem(title: "query todos", handler: { [weak self] indexPath in
+                self?.queryTodosTapped()
+            }),
+            BaseTableViewItem(title: "query userTodos", handler: { [weak self] indexPath in
+                self?.queryUserTodosTapped()
+            }),
+            BaseTableViewItem(title: "mutation updateTodo", handler: { [weak self] indexPath in
+                self?.mutationUpdateTodoTapped()
+            })
+        ]
+    }
+
+    func queryUsersTapped() {
 
         struct users: GQLQueryProtocol {
             var id: String = .defaultValue
@@ -33,7 +62,7 @@ class ViewController: UIViewController {
 
     }
 
-    @IBAction func queryUserWithIDTapped(_ sender: Any) {
+    func queryUserWithIDTapped() {
 
         struct user: GQLQueryProtocol {
             var id: String = .defaultValue
@@ -52,7 +81,7 @@ class ViewController: UIViewController {
 
     }
 
-    @IBAction func queryTodosTapped(_ sender: Any) {
+    func queryTodosTapped() {
 
         struct todos: GQLQueryProtocol {
             var id: String = .defaultValue
@@ -70,7 +99,7 @@ class ViewController: UIViewController {
 
     }
 
-    @IBAction func queryUserTodosTapped(_ sender: Any) {
+    func queryUserTodosTapped() {
 
         struct user: GQLQueryProtocol {
             var todos = todo()
@@ -95,8 +124,7 @@ class ViewController: UIViewController {
         
     }
 
-
-    @IBAction func mutationUpdateTodoTapped(_ sender: Any) {
+    func mutationUpdateTodoTapped() {
 
         struct updateTodo: GQLQueryProtocol {
             var id: String = .defaultValue
@@ -123,6 +151,37 @@ class ViewController: UIViewController {
 
 }
 
+extension ExampleViewController: UITableViewDataSource {
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        1
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        dataSource.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        let cell = tableView.dequeueReusableCell(withIdentifier: QueryTableViewCell.reuseIdentifier, for: indexPath)
+        if let cell = cell as? QueryTableViewCell {
+            cell.item = dataSource[indexPath.row]
+        }
+        return cell
+    }
+}
+
+extension ExampleViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = dataSource[indexPath.row]
+        if let handler = item.handler {
+            handler(indexPath)
+        }
+    }
+
+}
+
 extension String {
     static let defaultValue = ""
 }
@@ -130,5 +189,4 @@ extension String {
 extension Bool {
     static let defaultValue = false
 }
-
 
