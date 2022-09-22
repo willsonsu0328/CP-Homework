@@ -33,9 +33,9 @@
 ### 畫面呈現
   
   * Project
-  
-  ![GraphQLExample](https://user-images.githubusercontent.com/12155964/191713402-61252b3d-5c9d-420b-9d4e-e694f0f2ff68.gif)
+
+  ![GraphQLExample](https://user-images.githubusercontent.com/12155964/191786797-bf63ed21-4789-4b0d-942c-16bf188efaf6.gif)
 
   * Unit Test
   
-  ![GraphQLUnitest](https://user-images.githubusercontent.com/12155964/191713564-021d76e6-dc5c-45da-af86-1ed2d92c5c22.gif)
+  ![GraphQLUnittest](https://user-images.githubusercontent.com/12155964/191785885-ea523506-5285-4323-80c1-cf0c63736faa.gif)
