@@ -25,7 +25,7 @@ class ViewController: UIViewController {
         APIManager.shared.fetch(query: users()) { (result: Result<ResponseData<UsersData>, Error>) in
             switch result {
             case let .success(responseData):
-                print(responseData.data.users)
+                print("Response users: \n\n" + "\(responseData.data.users)" + "\n")
             case let .failure(error):
                 print(error)
             }
@@ -44,7 +44,7 @@ class ViewController: UIViewController {
         APIManager.shared.fetch(query: user()) { (result: Result<ResponseData<UserData>, Error>) in
             switch result {
             case let .success(responseData):
-                print(responseData.data.user)
+                print("Response user: \n\n" + "\(responseData.data.user)" + "\n")
             case let .failure(error):
                 print(error)
             }
@@ -62,7 +62,7 @@ class ViewController: UIViewController {
         APIManager.shared.fetch(query: todos()) { (result: Result<ResponseData<TodosData>, Error>) in
             switch result {
             case let .success(responseData):
-                print(responseData.data.todos)
+                print("Response todos: \n\n" + "\(responseData.data.todos)" + "\n")
             case let .failure(error):
                 print(error)
             }
@@ -87,7 +87,7 @@ class ViewController: UIViewController {
         ]) { (result: Result<ResponseData<UserData>, Error>) in
             switch result {
             case let .success(responseData):
-                print(responseData.data.user)
+                print("Response user's todos: \n\n" + "\(responseData.data.user)" + "\n")
             case let .failure(error):
                 print(error)
             }
@@ -113,7 +113,7 @@ class ViewController: UIViewController {
         APIManager.shared.fetch(operationType: .mutation, query: updateTodo(), parameters: parameters) { (result: Result<ResponseData<UpdateTodoData>, Error>) in
             switch result {
             case let .success(responseData):
-                print(responseData.data.updateTodo)
+                print("Response mutation updateTodo: \n\n" + "\(responseData.data.updateTodo)" + "\n")
             case let .failure(error):
                 print(error)
             }

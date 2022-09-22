@@ -47,7 +47,7 @@ extension GQLQueryProtocol {
             }
 
             // debug
-            print(queryString)
+            print("GraphQL Query String: \n\n" + "\(queryString)" + "\n")
         }
 
         return queryString
