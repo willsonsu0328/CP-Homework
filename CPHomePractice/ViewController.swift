@@ -17,9 +17,9 @@ class ViewController: UIViewController {
     @IBAction func queryUsersTapped(_ sender: Any) {
 
         struct users: GQLQueryProtocol {
-            var id: String = ""
-            var email: String = ""
-            var name: String = ""
+            var id: String = .defaultValue
+            var email: String = .defaultValue
+            var name: String = .defaultValue
         }
 
         APIManager.shared.fetch(query: users()) { (result: Result<ResponseData<UsersData>, Error>) in
@@ -36,9 +36,9 @@ class ViewController: UIViewController {
     @IBAction func queryUserWithIDTapped(_ sender: Any) {
 
         struct user: GQLQueryProtocol {
-            var id: String = ""
-            var name: String = ""
-            var email: String = ""
+            var id: String = .defaultValue
+            var name: String = .defaultValue
+            var email: String = .defaultValue
         }
 
         APIManager.shared.fetch(query: user()) { (result: Result<ResponseData<UserData>, Error>) in
@@ -55,8 +55,8 @@ class ViewController: UIViewController {
     @IBAction func queryTodosTapped(_ sender: Any) {
 
         struct todos: GQLQueryProtocol {
-            var id: String = ""
-            var description: String = ""
+            var id: String = .defaultValue
+            var description: String = .defaultValue
         }
 
         APIManager.shared.fetch(query: todos()) { (result: Result<ResponseData<TodosData>, Error>) in
@@ -77,9 +77,9 @@ class ViewController: UIViewController {
         }
 
         struct todo: GQLQueryProtocol {
-            var id: String = ""
-            var description: String = ""
-            var done: Bool = false
+            var id: String = .defaultValue
+            var description: String = .defaultValue
+            var done: Bool = .defaultValue
         }
 
         APIManager.shared.fetch(query: user(), parameters: [
@@ -99,8 +99,8 @@ class ViewController: UIViewController {
     @IBAction func mutationUpdateTodoTapped(_ sender: Any) {
 
         struct updateTodo: GQLQueryProtocol {
-            var id: String = ""
-            var done: Bool = false
+            var id: String = .defaultValue
+            var done: Bool = .defaultValue
         }
 
         let parameters: [String: Any] = [
@@ -122,4 +122,13 @@ class ViewController: UIViewController {
     }
 
 }
+
+extension String {
+    static let defaultValue = ""
+}
+
+extension Bool {
+    static let defaultValue = false
+}
+
 

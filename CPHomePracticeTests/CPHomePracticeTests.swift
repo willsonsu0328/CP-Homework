@@ -23,9 +23,9 @@ class CPHomePracticeTests: XCTestCase {
     func testUsers() throws {
 
         struct users: GQLQueryProtocol {
-            var id: String = ""
-            var name: String = ""
-            var email: String = ""
+            var id: String = .defaultValue
+            var name: String = .defaultValue
+            var email: String = .defaultValue
         }
 
         testStructToDictionary(someStruct: users())
@@ -36,9 +36,9 @@ class CPHomePracticeTests: XCTestCase {
     func testUserWithParameter() throws {
 
         struct user: GQLQueryProtocol {
-            var id: String = ""
-            var name: String = ""
-            var email: String = ""
+            var id: String = .defaultValue
+            var name: String = .defaultValue
+            var email: String = .defaultValue
         }
 
         testStructToDictionary(someStruct: user())
@@ -54,8 +54,8 @@ class CPHomePracticeTests: XCTestCase {
     func testTodos() throws {
 
         struct todos: GQLQueryProtocol {
-            var id: String = ""
-            var description: String = ""
+            var id: String = .defaultValue
+            var description: String = .defaultValue
         }
 
         testStructToDictionary(someStruct: todos())
@@ -69,9 +69,9 @@ class CPHomePracticeTests: XCTestCase {
         }
 
         struct todo: GQLQueryProtocol {
-            var id: String = ""
-            var description: String = ""
-            var done: Bool = false
+            var id: String = .defaultValue
+            var description: String = .defaultValue
+            var done: Bool = .defaultValue
         }
 
         testStructToDictionary(someStruct: user())
@@ -87,8 +87,8 @@ class CPHomePracticeTests: XCTestCase {
     func testMutationUpdateTodo() throws {
 
         struct updateTodo: GQLQueryProtocol {
-            var id: String = ""
-            var done: Bool = false
+            var id: String = .defaultValue
+            var done: Bool = .defaultValue
         }
 
         testStructToDictionary(someStruct: updateTodo())
@@ -126,9 +126,9 @@ class CPHomePracticeTests: XCTestCase {
     func testUsersModels() throws {
 
         struct users: GQLQueryProtocol {
-            var id: String = ""
-            var email: String = ""
-            var name: String = ""
+            var id: String = .defaultValue
+            var email: String = .defaultValue
+            var name: String = .defaultValue
         }
         let json = """
         {
@@ -169,9 +169,9 @@ class CPHomePracticeTests: XCTestCase {
     func testUserModel() throws {
 
         struct user: GQLQueryProtocol {
-            var id: String = ""
-            var name: String = ""
-            var email: String = ""
+            var id: String = .defaultValue
+            var name: String = .defaultValue
+            var email: String = .defaultValue
         }
 
         let json = """
@@ -200,8 +200,8 @@ class CPHomePracticeTests: XCTestCase {
     func testTodoModels() throws {
 
         struct todos: GQLQueryProtocol {
-            var id: String = ""
-            var description: String = ""
+            var id: String = .defaultValue
+            var description: String = .defaultValue
         }
 
         let json = """
@@ -240,9 +240,9 @@ class CPHomePracticeTests: XCTestCase {
         }
 
         struct todo: GQLQueryProtocol {
-            var id: String = ""
-            var description: String = ""
-            var done: Bool = false
+            var id: String = .defaultValue
+            var description: String = .defaultValue
+            var done: Bool = .defaultValue
         }
 
         let json = """
@@ -282,8 +282,8 @@ class CPHomePracticeTests: XCTestCase {
     func testMutationUpdateTodoModel() throws {
 
         struct updateTodo: GQLQueryProtocol {
-            var id: String = ""
-            var done: Bool = false
+            var id: String = .defaultValue
+            var done: Bool = .defaultValue
         }
 
         let json = """
